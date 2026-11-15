@@ -1,0 +1,26 @@
+{
+  "name": "@careos/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@careos/coverage-engine": "workspace:*",
+    "@careos/numbering": "workspace:*",
+    "@careos/permissions": "workspace:*",
+    "@careos/shared-types": "workspace:*",
+    "@careos/shared-utils": "workspace:*",
+    "@careos/supabase-client": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.3"
+  }
+}

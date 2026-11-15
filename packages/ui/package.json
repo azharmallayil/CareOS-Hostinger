@@ -1,0 +1,23 @@
+{
+  "name": "@careos/ui",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.1.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.4",
+    "lucide-react": "^0.454.0"
+  },
+  "devDependencies": {
+    "@careos/shared-types": "workspace:*",
+    "typescript": "^5.6.3"
+  }
+}

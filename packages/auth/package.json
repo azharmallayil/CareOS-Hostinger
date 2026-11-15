@@ -1,0 +1,20 @@
+{
+  "name": "@careos/auth",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@careos/shared-types": "workspace:*",
+    "@careos/permissions": "workspace:*",
+    "@supabase/supabase-js": "^2.46.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}

@@ -1,0 +1,52 @@
+services:
+  # ── CareOS API (Hostinger development parity) ─────────────────────────────────
+  api:
+    build:
+      context: ..
+      dockerfile: apps/api/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      PORT: "3000"
+      HOST: "0.0.0.0"
+      LOG_LEVEL: info
+      # Supabase Cloud (Singapore)
+      SUPABASE_URL: ${SUPABASE_URL:-https://vbckrirksziluvwqpamx.supabase.co}
+      SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY:-}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY:-}
+      CORS_ORIGINS: http://localhost:5173,http://localhost:5174
+      COOKIE_SECRET: ${COOKIE_SECRET:-dev-only-change-in-prod-at-least-32chars}
+      JWT_SECRET: ${JWT_SECRET:-dev-only-change-in-prod-at-least-32chars}
+      SUPABASE_JWT_SECRET: ${SUPABASE_JWT_SECRET:-dev-only-change-in-prod-at-least-32chars}
+      SMS_PROVIDER: console
+      EMAIL_PROVIDER: console
+      PAYMENT_PROVIDER: none
+      ERP_PROVIDER: none
+    develop:
+      watch:
+        - path: ../apps/api/src
+          action: sync+restart
+          target: /app/src
+        - path: ../packages
+          action: sync+restart
+          target: /app/packages
+
+  # ── CareOS Worker (OCI Always Free ARM64 worker parity) ────────────────────────
+  worker:
+    build:
+      context: ..
+      dockerfile: apps/worker/Dockerfile
+    environment:
+      NODE_ENV: development
+      LOG_LEVEL: info
+      SUPABASE_URL: ${SUPABASE_URL:-https://vbckrirksziluvwqpamx.supabase.co}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY:-}
+      POLL_INTERVAL_MS: "3000"
+      LEASE_DURATION_SECONDS: "60"
+      WORKER_CONCURRENCY: "3"
+      SMS_PROVIDER: console
+      EMAIL_PROVIDER: console
+      PAYMENT_PROVIDER: none
+      ERP_PROVIDER: none
+    restart: on-failure

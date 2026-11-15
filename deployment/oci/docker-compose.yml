@@ -1,0 +1,40 @@
+# ==============================================================================
+# CareOS Background Worker — OCI Always Free Docker Compose Configuration
+# ==============================================================================
+# Architecture: Outbound-only worker container
+# No public ports exposed. Connects outbound to Supabase Cloud Singapore.
+# ==============================================================================
+
+version: "3.8"
+
+services:
+  worker:
+    container_name: careos-worker
+    image: careos-worker:latest
+    build:
+      context: ../..
+      dockerfile: deployment/oci/Dockerfile
+    restart: unless-stopped
+    stop_grace_period: 30s
+    env_file:
+      - .env
+    # Outbound-only networking: NO PORTS EXPOSED
+    networks:
+      - careos-internal
+    deploy:
+      resources:
+        limits:
+          cpus: "1.5"
+          memory: 2048M
+        reservations:
+          cpus: "0.25"
+          memory: 512M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+networks:
+  careos-internal:
+    driver: bridge

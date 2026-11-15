@@ -1,0 +1,3 @@
+-- CareOS Supabase Edge Functions
+-- Custom JWT claims hook and other server-side functions will be placed here.
+-- Implemented in Step 4.

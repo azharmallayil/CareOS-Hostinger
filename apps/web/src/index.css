@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design system CSS custom properties ───────────────────────────────────── */
+:root {
+  --color-primary-100: theme("colors.primary.100");
+  --color-primary-500: theme("colors.primary.500");
+  --color-primary-600: theme("colors.primary.600");
+  --color-primary-700: theme("colors.primary.700");
+  --color-accent-500: theme("colors.accent.500");
+
+  --font-sans: theme("fontFamily.sans");
+  --font-arabic: theme("fontFamily.arabic");
+}
+
+/* ── Base styles ───────────────────────────────────────────────────────────── */
+html {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: #111827; /* neutral-900 */
+  background-color: #f9fafb; /* neutral-50 */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* RTL: switch to Arabic font */
+html[dir="rtl"] {
+  font-family: var(--font-arabic);
+}
+
+/* ── Focus ring (WCAG 2.1 AA) ─────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* ── Reduced motion ────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
